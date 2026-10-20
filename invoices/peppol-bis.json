@@ -1,0 +1,34 @@
+{
+  "profile": "peppol-bis",
+  "pdf": true,
+  "number": "INV-2026-0107",
+  "issueDate": "2026-10-19",
+  "dueDate": "2026-11-18",
+  "currency": "EUR",
+  "language": "fr",
+  "seller": {
+    "name": "Exemple SRL",
+    "vatId": "BE0123456749",
+    "registrationId": "0123456749",
+    "registrationScheme": "0208",
+    "address": { "street": "Rue de la Loi 16", "postalCode": "1000", "city": "Bruxelles", "country": "BE" },
+    "electronicAddress": { "scheme": "0208", "id": "0123456749" }
+  },
+  "buyer": {
+    "name": "Voorbeeld NV",
+    "vatId": "BE0987654394",
+    "reference": "PO-5521",
+    "address": { "street": "Meir 1", "postalCode": "2000", "city": "Antwerpen", "country": "BE" },
+    "electronicAddress": { "scheme": "0208", "id": "0987654394" }
+  },
+  "delivery": { "date": "2026-10-15" },
+  "lines": [
+    { "description": "Licence logicielle, octobre 2026", "quantity": 10, "unitPrice": 45.00, "vatRate": 21 },
+    { "description": "Support", "quantity": 4, "unit": "HUR", "unitPrice": 85.00, "vatRate": 21 }
+  ],
+  "payment": {
+    "iban": "BE68539007547034",
+    "reference": "+++090/9337/55493+++",
+    "terms": "Payable à 30 jours."
+  }
+}

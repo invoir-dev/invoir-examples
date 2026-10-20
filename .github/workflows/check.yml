@@ -1,0 +1,57 @@
+name: check
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "17 6 * * 1"   # weekly, so a change on the API side shows up here
+
+jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+          cache: false
+      - name: curl (bash)
+        run: bash -n curl/generate.sh && bash -n curl/validate.sh
+      - name: Node.js
+        run: node --check node/generate.mjs && node --check node/validate.mjs
+      - name: Python
+        run: python3 -m py_compile python/generate.py python/validate.py
+      - name: PHP
+        run: php -l php/generate.php && php -l php/validate.php
+      - name: Go
+        run: go vet ./... && go build ./...
+      - name: JSON
+        run: for f in invoice.json invoices/*.json; do python3 -m json.tool "$f" > /dev/null; done
+
+  # Runs every example against the live API, but only when the repository has an INVOIR_API_KEY
+  # secret (a test key, inv_test_...: watermarked PDFs, never counted, kept 24 hours).
+  live:
+    runs-on: ubuntu-latest
+    needs: syntax
+    if: github.event_name != 'pull_request'
+    env:
+      INVOIR_API_KEY: ${{ secrets.INVOIR_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+          cache: false
+      - name: Run every example
+        run: |
+          if [ -z "$INVOIR_API_KEY" ]; then echo "No INVOIR_API_KEY secret: skipped."; exit 0; fi
+          pip install -q -r python/requirements.txt
+          run=$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT
+          for lang in curl node python php go; do
+            python3 -c "import json,sys; d=json.load(open('invoice.json')); d['number']=f'CI-{sys.argv[1]}-{sys.argv[2]}'; json.dump(d, open(f'ci-{sys.argv[1]}.json','w'))" "$lang" "$run"
+          done
+          ./curl/generate.sh ci-curl.json && ./curl/validate.sh "CI-curl-$run.pdf"
+          node node/generate.mjs ci-node.json && node node/validate.mjs "CI-node-$run.pdf"
+          python3 python/generate.py ci-python.json && python3 python/validate.py "CI-python-$run.pdf"
+          php php/generate.php ci-php.json && php php/validate.php "CI-php-$run.pdf"
+          go run ./go/generate ci-go.json && go run ./go/validate "CI-go-$run.pdf"

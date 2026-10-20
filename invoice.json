@@ -1,0 +1,29 @@
+{
+  "profile": "factur-x",
+  "number": "RE-2026-0042",
+  "issueDate": "2026-10-19",
+  "dueDate": "2026-11-18",
+  "language": "de",
+  "seller": {
+    "name": "Musterbau GmbH",
+    "vatId": "DE123456789",
+    "address": { "street": "Industriestraße 12", "postalCode": "80331", "city": "München", "country": "DE" },
+    "contact": { "name": "Erika Mustermann", "email": "rechnung@musterbau.example", "phone": "+49 89 1234560" }
+  },
+  "buyer": {
+    "name": "Beispiel AG",
+    "vatId": "DE987654321",
+    "address": { "street": "Hauptstraße 1", "postalCode": "10115", "city": "Berlin", "country": "DE" }
+  },
+  "delivery": { "date": "2026-10-16" },
+  "lines": [
+    { "description": "Beratung Softwarearchitektur", "quantity": 12.5, "unit": "HUR", "unitPrice": 140.00, "vatRate": 19 },
+    { "description": "Fachbuch", "quantity": 3, "unitPrice": 39.90, "vatRate": 7 }
+  ],
+  "payment": {
+    "iban": "DE89370400440532013000",
+    "bic": "COBADEFFXXX",
+    "reference": "RE-2026-0042",
+    "terms": "Zahlbar innerhalb von 30 Tagen ohne Abzug."
+  }
+}

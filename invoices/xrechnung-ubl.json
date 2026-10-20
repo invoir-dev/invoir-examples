@@ -1,0 +1,31 @@
+{
+  "profile": "xrechnung-ubl",
+  "pdf": true,
+  "number": "RE-2026-0043",
+  "issueDate": "2026-10-19",
+  "dueDate": "2026-11-18",
+  "language": "de",
+  "seller": {
+    "name": "Musterbau GmbH",
+    "vatId": "DE123456789",
+    "address": { "street": "Industriestraße 12", "postalCode": "80331", "city": "München", "country": "DE" },
+    "contact": { "name": "Erika Mustermann", "email": "rechnung@musterbau.example", "phone": "+49 89 1234560" },
+    "electronicAddress": { "scheme": "EM", "id": "rechnung@musterbau.example" }
+  },
+  "buyer": {
+    "name": "Bundesamt für Beispiele",
+    "reference": "991-01234-56",
+    "address": { "street": "Amtsweg 5", "postalCode": "53113", "city": "Bonn", "country": "DE" },
+    "electronicAddress": { "scheme": "0204", "id": "991-01234-56" }
+  },
+  "delivery": { "date": "2026-10-16" },
+  "lines": [
+    { "description": "Wartung Gebäudetechnik, Oktober 2026", "quantity": 1, "unit": "LS", "unitPrice": 1850.00, "vatRate": 19 }
+  ],
+  "payment": {
+    "iban": "DE89370400440532013000",
+    "bic": "COBADEFFXXX",
+    "reference": "RE-2026-0043",
+    "terms": "Zahlbar innerhalb von 30 Tagen ohne Abzug."
+  }
+}

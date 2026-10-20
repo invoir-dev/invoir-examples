@@ -1,0 +1,9 @@
+# Files the examples download or create
+*.pdf
+*.xml
+node_modules/
+vendor/
+__pycache__/
+.venv/
+go/generate/generate
+go/validate/validate
